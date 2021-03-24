@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Observable } from "rxjs";
 
-function Timer() {
+export function Timer() {
   const [lastTime, setLastTime] = useState(1);
   const [time, setTime] = useState(0);
   const [isOn, setIsOn] = useState(false);
@@ -42,21 +42,21 @@ function Timer() {
     setIsOn(true);
     setTime(0);
     setLastTime(1);
-    console.log(subscr.closed + "  " + lastTime);
+    console.log(`${subscr.closed} ${lastTime}`);
     if (subscr.closed === false) {
       subscr.unsubscribe();
     }
     setSubscr(timer.subscribe({ next: setTime }));
   }
 
+  const getTwoLastDigits = n => `0${n}`.slice(-2);
+
   function sToTime(s) {
-    let seconds = Math.floor((s / 10) % 60),
-      minutes = Math.floor((s / 600) % 60),
-      hours = Math.floor((s / (60 * 600)) % 24);
-    hours = hours < 10 ? "0" + hours : hours;
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-    return hours + ":" + minutes + ":" + seconds;
+    const seconds = getTwoLastDigits(Math.floor((s / 10) % 60));
+    const minutes = getTwoLastDigits(Math.floor((s / 600) % 60));
+    const hours = getTwoLastDigits(Math.floor((s / (60 * 600)) % 24));
+
+    return `${hours}:${minutes}:${seconds}`;
   }
 
   return (
@@ -68,5 +68,3 @@ function Timer() {
     </div>
   );
 }
-
-export default Timer;
