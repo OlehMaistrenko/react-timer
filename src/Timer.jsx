@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Observable } from "rxjs";
 
-function Timer() {
+export function Timer() {
   const [lastTime, setLastTime] = useState(1);
   const [time, setTime] = useState(0);
   const [isOn, setIsOn] = useState(false);
@@ -68,5 +68,3 @@ function Timer() {
     </div>
   );
 }
-
-export default Timer;
