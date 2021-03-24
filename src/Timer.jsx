@@ -42,7 +42,7 @@ export function Timer() {
     setIsOn(true);
     setTime(0);
     setLastTime(1);
-    console.log(subscr.closed + "  " + lastTime);
+    console.log(`${subscr.closed} ${lastTime}`);
     if (subscr.closed === false) {
       subscr.unsubscribe();
     }
@@ -56,7 +56,7 @@ export function Timer() {
     const minutes = getTwoLastDigits(Math.floor((s / 600) % 60));
     const hours = getTwoLastDigits(Math.floor((s / (60 * 600)) % 24));
 
-    return hours + ":" + minutes + ":" + seconds;
+    return `${hours}:${minutes}:${seconds}`;
   }
 
   return (
