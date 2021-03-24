@@ -49,13 +49,13 @@ function Timer() {
     setSubscr(timer.subscribe({ next: setTime }));
   }
 
+  const getTwoLastDigits = n => `0${n}`.slice(-2);
+
   function sToTime(s) {
-    let seconds = Math.floor((s / 10) % 60),
-      minutes = Math.floor((s / 600) % 60),
-      hours = Math.floor((s / (60 * 600)) % 24);
-    hours = hours < 10 ? "0" + hours : hours;
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+    const seconds = getTwoLastDigits(Math.floor((s / 10) % 60));
+    const minutes = getTwoLastDigits(Math.floor((s / 600) % 60));
+    const hours = getTwoLastDigits(Math.floor((s / (60 * 600)) % 24));
+
     return hours + ":" + minutes + ":" + seconds;
   }
 
